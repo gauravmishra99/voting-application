@@ -25,9 +25,14 @@ const AdminLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://rotarcthitk-voting-application.herokuapp.com/admin/login", {
-        email,
-        password,
+      const response = await axios({
+        url: "https://rotarcthitk-voting-application.herokuapp.com/admin/login",
+        method: "post",
+        withCredentials: true,
+        data: {
+          email,
+          password,
+        },
       });
       if (response.status === 201) {
         setIsLoggedIn(true);

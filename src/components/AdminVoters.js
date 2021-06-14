@@ -23,12 +23,16 @@ const AdminVoters = () => {
   }, []);
 
   const fetchVoters = async () => {
-    const response = await axios.get("/admin/getVoters");
+    const response = await axios.get(
+      "https://rotarcthitk-voting-application.herokuapp.com/admin/getVoters"
+    );
     setVoters(response.data);
   };
 
   const sendEmail = async () => {
-    const response = await axios.post("/sendMailtoVoters");
+    const response = await axios.post(
+      "https://rotarcthitk-voting-application.herokuapp.com/sendMailtoVoters"
+    );
     if (response.status === 200) {
       setOpen1(true);
     }
@@ -44,7 +48,10 @@ const AdminVoters = () => {
 
   const handleAddVoters = async (e) => {
     e.preventDefault();
-    const response = await axios.post("/admin/addVoters", { name });
+    const response = await axios.post(
+      "https://rotarcthitk-voting-application.herokuapp.com/admin/addVoters",
+      { name }
+    );
     if (response.status === 201) {
       setOpen(true);
       setName("");
@@ -118,7 +125,12 @@ const AdminVoters = () => {
           </form>
         </CardContent>
       </Card>
-      <Button style={{marginTop:"15px"}} variant="contained" color="secondary" onClick={sendEmail}>
+      <Button
+        style={{ marginTop: "15px" }}
+        variant="contained"
+        color="secondary"
+        onClick={sendEmail}
+      >
         Send Email to Voters
       </Button>
       {/* <Card>

@@ -25,13 +25,13 @@ const AdminLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/admin/login", {
+      const response = await axios.post("https://rotarcthitk-voting-application.herokuapp.com/admin/login", {
         email,
         password,
       });
       if (response.status === 201) {
         setIsLoggedIn(true);
-        history.push("/admin-page/participants");
+        history.push("https://rotarcthitk-voting-application.herokuapp.com/admin-page/participants");
       }
     } catch (e) {
       setOpen(true);

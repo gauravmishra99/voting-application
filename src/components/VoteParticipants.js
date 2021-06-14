@@ -29,7 +29,7 @@ const VoteParticipants = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.post(
-      "/voteVoter/gauravmishra.190699@gmail.com",
+      "https://rotarcthitk-voting-application.herokuapp.com/voteVoter/gauravmishra.190699@gmail.com",
       { ParticipantId: value }
     );
     window.location.reload();
@@ -41,7 +41,7 @@ const VoteParticipants = () => {
 
   const validateVoter = async () => {
     try {
-      const url = `/validateEmail/${token}`;
+      const url = `https://rotarcthitk-voting-application.herokuapp.com/validateEmail/${token}`;
       const response = await axios.post(url);
       if (response.status === 200) {
         setVoter(response.data);
@@ -60,7 +60,9 @@ const VoteParticipants = () => {
   };
 
   const fetchParticipants = async () => {
-    const response = await axios.get("/getParticipantsVoter");
+    const response = await axios.get(
+      "https://rotarcthitk-voting-application.herokuapp.com/getParticipantsVoter"
+    );
     setParticipants(response.data);
   };
 

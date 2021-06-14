@@ -21,7 +21,7 @@ function App() {
   }, []);
 
   const verifyUser = async () => {
-    const response = await axios.post("/admin/decode");
+    const response = await axios.post("https://rotarcthitk-voting-application.herokuapp.com/admin/decode");
     if (response.data === true) {
       setIsLoggedIn(true);
     }

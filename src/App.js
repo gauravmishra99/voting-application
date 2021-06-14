@@ -1,24 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./components/Header";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import HomeBody from "./components/HomeBody";
+import AdminLogin from "./components/AdminLogin";
+import VoteParticipants from "./components/VoteParticipants";
+import AdminPage from "./components/AdminPage";
+import AdminParticipants from "./components/AdminParticipants";
+import AdminVoters from "./components/AdminVoters";
+import AdminVotes from "./components/AdminVotes";
+import { UserContext } from "./components/context/UserContext";
+import { useContext, useEffect } from "react";
+import axios from "axios";
 
 function App() {
+  const { userValue, loginValue } = useContext(UserContext);
+  const [isLoggedIn, setIsLoggedIn] = loginValue;
+
+  useEffect(() => {
+    verifyUser();
+  }, []);
+
+  const verifyUser = async () => {
+    const response = await axios.post("/admin/decode");
+    if (response.data === true) {
+      setIsLoggedIn(true);
+    }
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+      </div>
+
+      <Switch>
+        <Route path="/" exact>
+          <AdminLogin />
+        </Route>
+        <Route path="/vote-participants/:token">
+          <VoteParticipants />
+        </Route>
+        {/* <Route path="/admin-page" exact>
+          <AdminPage />
+        </Route> */}
+        <Route path="/admin-page/participants">
+          <AdminParticipants />
+        </Route>
+        <Route path="/admin-page/voters">
+          <AdminVoters />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

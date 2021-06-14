@@ -31,7 +31,7 @@ const AdminLogin = () => {
       });
       if (response.status === 201) {
         setIsLoggedIn(true);
-        history.push("https://rotarcthitk-voting-application.herokuapp.com/admin-page/participants");
+        history.push("/admin-page/participants");
       }
     } catch (e) {
       setOpen(true);

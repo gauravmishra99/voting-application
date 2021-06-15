@@ -33,7 +33,9 @@ const AdminParticipants = () => {
   }, []);
 
   const fetchParticipants = async () => {
-    const response = await axios.get("https://rotarcthitk-voting-application.herokuapp.com/getParticipants");
+    const response = await axios.get(
+      "https://rotarcthitk-voting-application.herokuapp.com/getParticipants"
+    );
     setParticipants(response.data);
     console.log(response.data);
   };
@@ -45,7 +47,15 @@ const AdminParticipants = () => {
 
   const handleAddParticipants = async (e) => {
     e.preventDefault();
-    const response = await axios.post("https://rotarcthitk-voting-application.herokuapp.com/admin/addParticipants", { name });
+    const response = await axios({
+      url: "https://rotarcthitk-voting-application.herokuapp.com/admin/addParticipants",
+      method: "post",
+      withCredentials: true,
+      data: {
+        name,
+      },
+    });
+
     if (response.status === 201) {
       setOpen(true);
       setName("");

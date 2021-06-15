@@ -103,7 +103,11 @@ export default function PersistentDrawerRight() {
 
   const handleLogout = async (e) => {
     try {
-      const response = await axios.post("https://rotarcthitk-voting-application.herokuapp.com/admin/logout");
+      const response = await axios({
+        url: "https://rotarcthitk-voting-application.herokuapp.com/admin/logout",
+        method: "post",
+        withCredentials: true,
+      });
       setIsLoggedIn(false);
       history.push("/");
     } catch (e) {

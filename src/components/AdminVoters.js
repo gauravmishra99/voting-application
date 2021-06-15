@@ -23,16 +23,20 @@ const AdminVoters = () => {
   }, []);
 
   const fetchVoters = async () => {
-    const response = await axios.get(
-      "https://rotarcthitk-voting-application.herokuapp.com/admin/getVoters"
-    );
+    const response = await axios({
+      url: "https://rotarcthitk-voting-application.herokuapp.com/admin/getVoters",
+      method: "get",
+      withCredentials: true,
+    });
     setVoters(response.data);
   };
 
   const sendEmail = async () => {
-    const response = await axios.post(
-      "https://rotarcthitk-voting-application.herokuapp.com/sendMailtoVoters"
-    );
+    const response = await axios({
+      url: "https://rotarcthitk-voting-application.herokuapp.com/sendMailtoVoters",
+      method: "post",
+      withCredentials: true,
+    });
     if (response.status === 200) {
       setOpen1(true);
     }
@@ -48,10 +52,15 @@ const AdminVoters = () => {
 
   const handleAddVoters = async (e) => {
     e.preventDefault();
-    const response = await axios.post(
-      "https://rotarcthitk-voting-application.herokuapp.com/admin/addVoters",
-      { name }
-    );
+    const response = await axios({
+      url: "https://rotarcthitk-voting-application.herokuapp.com/admin/addVoters",
+      method: "post",
+      withCredentials: true,
+      data: {
+        name,
+        email,
+      },
+    });
     if (response.status === 201) {
       setOpen(true);
       setName("");

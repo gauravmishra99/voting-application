@@ -28,10 +28,8 @@ const VoteParticipants = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post(
-      "https://rotarcthitk-voting-application.herokuapp.com/voteVoter/gauravmishra.190699@gmail.com",
-      { ParticipantId: value }
-    );
+    const url = `https://rotarcthitk-voting-application.herokuapp.com/voteVoter/${voter.email}`;
+    await axios.post(url, { ParticipantId: value });
     window.location.reload();
   };
 

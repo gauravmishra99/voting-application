@@ -18,7 +18,7 @@ const AdminVoters = () => {
   const [open, setOpen] = useState(false);
   const [voters, setVoters] = useState([]);
   const [open1, setOpen1] = useState(false);
-  const [disableBtn, setDisableBtn] = useState(true);
+  const [disableBtn, setDisableBtn] = useState(false);
 
   useEffect(() => {
     fetchVoters();

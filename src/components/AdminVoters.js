@@ -18,6 +18,7 @@ const AdminVoters = () => {
   const [open, setOpen] = useState(false);
   const [voters, setVoters] = useState([]);
   const [open1, setOpen1] = useState(false);
+  const [disableBtn, setDisableBtn] = useState(true);
 
   useEffect(() => {
     fetchVoters();
@@ -64,6 +65,7 @@ const AdminVoters = () => {
 
   const handleAddVoters = async (e) => {
     e.preventDefault();
+    setDisableBtn(true);
     const response = await axios({
       url: "https://rotarcthitk-voting-application.herokuapp.com/admin/addVoters",
       method: "post",
@@ -81,6 +83,7 @@ const AdminVoters = () => {
       setEmail("");
       setVotes("");
     }
+    disableBtn(false);
   };
   return (
     <div className="participants">
@@ -154,12 +157,14 @@ const AdminVoters = () => {
               variant="contained"
               color="secondary"
               onClick={handleAddVoters}
+              disabled={disableBtn}
             >
-              Add Voter
+              {disableBtn ? "Please Wait" : "Add Voters"}
             </Button>
           </form>
         </CardContent>
       </Card>
+
       <Button
         style={{ marginTop: "15px" }}
         variant="contained"

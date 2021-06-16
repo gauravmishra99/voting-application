@@ -51,6 +51,17 @@ const AdminVoters = () => {
     fetchVoters();
   };
 
+  const deleteVoters = async () => {
+    const response = await axios({
+      url: "https://rotarcthitk-voting-application.herokuapp.com/admin/deleteVoters",
+      method: "post",
+      withCredentials: true,
+    });
+    if (response.status === 200) {
+      fetchVoters();
+    }
+  };
+
   const handleAddVoters = async (e) => {
     e.preventDefault();
     const response = await axios({
@@ -157,9 +168,16 @@ const AdminVoters = () => {
       >
         Send Email to Voters
       </Button>
-      {/* <Card>
-        <CardContent></CardContent>
-      </Card> */}
+
+      <Button
+        style={{ marginTop: "15px" }}
+        variant="contained"
+        color="secondary"
+        onClick={deleteVoters}
+      >
+        Delete all Voters
+      </Button>
+
       <Snackbar
         anchorOrigin={{
           vertical: "bottom",

@@ -62,6 +62,17 @@ const AdminParticipants = () => {
     }
   };
 
+  const deleteParticipants = async () => {
+    const response = await axios({
+      url: "https://rotarcthitk-voting-application.herokuapp.com/admin/deleteParticipants",
+      method: "post",
+      withCredentials: true,
+    });
+    if (response.status === 200) {
+      fetchParticipants();
+    }
+  };
+
   return (
     <div className="participants">
       <Card className="participant-details">
@@ -115,6 +126,15 @@ const AdminParticipants = () => {
           </form>
         </CardContent>
       </Card>
+
+      <Button
+        style={{ marginTop: "15px" }}
+        variant="contained"
+        color="secondary"
+        onClick={deleteParticipants}
+      >
+        Delete all Participants
+      </Button>
 
       <Snackbar
         anchorOrigin={{

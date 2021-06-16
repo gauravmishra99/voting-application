@@ -1,13 +1,10 @@
 import "./App.css";
 import Header from "./components/Header";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import HomeBody from "./components/HomeBody";
 import AdminLogin from "./components/AdminLogin";
 import VoteParticipants from "./components/VoteParticipants";
-import AdminPage from "./components/AdminPage";
 import AdminParticipants from "./components/AdminParticipants";
 import AdminVoters from "./components/AdminVoters";
-import AdminVotes from "./components/AdminVotes";
 import { UserContext } from "./components/context/UserContext";
 import { useContext, useEffect } from "react";
 import axios from "axios";

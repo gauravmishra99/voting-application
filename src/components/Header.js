@@ -14,11 +14,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
-import HowToVoteIcon from "@material-ui/icons/HowToVote";
-import HomeIcon from "@material-ui/icons/Home";
 import logo from "../rotaract term 20-21.png";
 import { UserContext } from "./context/UserContext";
 import axios from "axios";
@@ -110,8 +106,7 @@ export default function PersistentDrawerRight() {
       });
       setIsLoggedIn(false);
       history.push("/");
-    } catch (e) {
-    }
+    } catch (e) {}
   };
 
   return (
@@ -132,15 +127,17 @@ export default function PersistentDrawerRight() {
           <Typography variant="h6" noWrap className="header-title">
             Panel Discussion 2021
           </Typography>
-         {isLoggedIn && <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="end"
-            onClick={handleDrawerOpen}
-            className={clsx(open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>}
+          {isLoggedIn && (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="end"
+              onClick={handleDrawerOpen}
+              className={clsx(open && classes.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
         </Toolbar>
       </AppBar>
       {/* <main

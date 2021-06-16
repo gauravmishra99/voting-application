@@ -14,6 +14,7 @@ import axios from "axios";
 const AdminVoters = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [votes, setVotes] = useState("");
   const [open, setOpen] = useState(false);
   const [voters, setVoters] = useState([]);
   const [open1, setOpen1] = useState(false);
@@ -59,12 +60,15 @@ const AdminVoters = () => {
       data: {
         name,
         email,
+        quantityVotes: votes,
       },
     });
-    
+
     if (response.status === 201) {
       setOpen(true);
       setName("");
+      setEmail("");
+      setVotes("");
     }
   };
   return (
@@ -125,12 +129,22 @@ const AdminVoters = () => {
                 setEmail(e.target.value);
               }}
             />
+            <TextField
+              style={{ marginBottom: "15px" }}
+              id="outlined-basic"
+              label="No of Votes"
+              variant="outlined"
+              value={votes}
+              onChange={(e) => {
+                setVotes(e.target.value);
+              }}
+            />
             <Button
               variant="contained"
               color="secondary"
               onClick={handleAddVoters}
             >
-              Submit
+              Add Voter
             </Button>
           </form>
         </CardContent>

@@ -19,6 +19,8 @@ const AdminVoters = () => {
   const [voters, setVoters] = useState([]);
   const [open1, setOpen1] = useState(false);
   const [disableBtn, setDisableBtn] = useState(false);
+  const [disableEmail, setdisableEmail] = useState(false);
+  const [diasbleDeleteVoters, setDisableDeleteVoters] = useState(false);
 
   useEffect(() => {
     fetchVoters();
@@ -34,6 +36,7 @@ const AdminVoters = () => {
   };
 
   const sendEmail = async () => {
+    setdisableEmail(true);
     const response = await axios({
       url: "https://rotarcthitk-voting-application.herokuapp.com/sendMailtoVoters",
       method: "post",
@@ -42,6 +45,7 @@ const AdminVoters = () => {
     if (response.status === 200) {
       setOpen1(true);
     }
+    setdisableEmail(false);
   };
 
   const handleClose1 = () => {
@@ -53,6 +57,7 @@ const AdminVoters = () => {
   };
 
   const deleteVoters = async () => {
+    setDisableDeleteVoters(true);
     const response = await axios({
       url: "https://rotarcthitk-voting-application.herokuapp.com/admin/deleteVoters",
       method: "post",
@@ -61,6 +66,7 @@ const AdminVoters = () => {
     if (response.status === 200) {
       fetchVoters();
     }
+    setDisableDeleteVoters(false);
   };
 
   const handleAddVoters = async (e) => {
@@ -83,7 +89,7 @@ const AdminVoters = () => {
       setEmail("");
       setVotes("");
     }
-    disableBtn(false);
+    setDisableBtn(false);
   };
   return (
     <div className="participants">
@@ -170,8 +176,9 @@ const AdminVoters = () => {
         variant="contained"
         color="secondary"
         onClick={sendEmail}
+        disabled={disableEmail}
       >
-        Send Email to Voters
+        {disableEmail ? "Please Wait" : "Send Email to Voters"}
       </Button>
 
       <Button
@@ -179,8 +186,9 @@ const AdminVoters = () => {
         variant="contained"
         color="secondary"
         onClick={deleteVoters}
+        disabled={diasbleDeleteVoters}
       >
-        Delete all Voters
+        {diasbleDeleteVoters ? "Please Wait" : "Delete all Voters"}
       </Button>
 
       <Snackbar

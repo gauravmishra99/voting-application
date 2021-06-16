@@ -21,9 +21,11 @@ const AdminLogin = () => {
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = loginValue;
+  const [disable, setDisable] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setDisable(true);
     try {
       const response = await axios({
         url: "https://rotarcthitk-voting-application.herokuapp.com/admin/login",
@@ -95,8 +97,13 @@ const AdminLogin = () => {
                 setPassword(e.target.value);
               }}
             />
-            <Button variant="contained" color="primary" onClick={handleLogin}>
-              Login
+            <Button
+              disabled={disable}
+              variant="contained"
+              color="primary"
+              onClick={handleLogin}
+            >
+              {disable ? "Please wait!" : "Login"}
             </Button>
           </form>
         </CardContent>

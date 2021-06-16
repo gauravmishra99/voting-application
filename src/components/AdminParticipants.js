@@ -27,6 +27,8 @@ const AdminParticipants = () => {
   const [open, setOpen] = useState(false);
   const [removal, setRemoval] = useState(false);
   const [participants, setParticipants] = useState([]);
+  const [disable, setDisable] = useState(false);
+  const [disableBtn, setDisableBtn] = useState(false);
 
   useEffect(() => {
     fetchParticipants();
@@ -47,6 +49,7 @@ const AdminParticipants = () => {
 
   const handleAddParticipants = async (e) => {
     e.preventDefault();
+    setDisable(true);
     const response = await axios({
       url: "https://rotarcthitk-voting-application.herokuapp.com/admin/addParticipants",
       method: "post",
@@ -60,9 +63,11 @@ const AdminParticipants = () => {
       setOpen(true);
       setName("");
     }
+    setDisable(false);
   };
 
   const deleteParticipants = async () => {
+    setDisableBtn(true);
     const response = await axios({
       url: "https://rotarcthitk-voting-application.herokuapp.com/admin/deleteParticipants",
       method: "post",
@@ -71,6 +76,7 @@ const AdminParticipants = () => {
     if (response.status === 200) {
       fetchParticipants();
     }
+    setDisableBtn(false);
   };
 
   return (
@@ -120,8 +126,9 @@ const AdminParticipants = () => {
               variant="contained"
               color="secondary"
               onClick={handleAddParticipants}
+              disabled={disable}
             >
-              Submit
+              {disable ? "Please Wait" : "Add Participants"}
             </Button>
           </form>
         </CardContent>
@@ -132,8 +139,9 @@ const AdminParticipants = () => {
         variant="contained"
         color="secondary"
         onClick={deleteParticipants}
+        disabled={disableBtn}
       >
-        Delete all Participants
+        {disableBtn ? "Please Wait" : "Delete all Participants"}
       </Button>
 
       <Snackbar

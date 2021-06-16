@@ -21,6 +21,7 @@ const VoteParticipants = () => {
   const [voter, setVoter] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [allow, setAllow] = useState(false);
+  const [disable, setDisable] = useState(false);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -28,6 +29,7 @@ const VoteParticipants = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setDisable(true);
     const url = `https://rotarcthitk-voting-application.herokuapp.com/voteVoter/${voter.email}`;
     await axios.post(url, { ParticipantId: value });
     window.location.reload();
@@ -129,8 +131,9 @@ const VoteParticipants = () => {
                           variant="outlined"
                           color="primary"
                           onClick={handleSubmit}
+                          disabled={disable}
                         >
-                          Vote
+                          {disable ? "Please Wait" : "Vote"}
                         </Button>
                       </FormControl>
                     </CardContent>

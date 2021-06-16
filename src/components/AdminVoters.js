@@ -64,7 +64,7 @@ const AdminVoters = () => {
       },
     });
 
-    if (response.status === 201) {
+    if (response.status === 200) {
       setOpen(true);
       setName("");
       setEmail("");
